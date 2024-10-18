@@ -1,13 +1,20 @@
+"use client";
+
 import React from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
 const Hero = () => {
+  const router = useRouter();
+
   return (
     <div className="relative py-12 overflow-hidden bg-[#F5DEB3] sm:py-16 lg:py-20 xl:py-24">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="flex flex-col lg:flex-row lg:items-center">
           <div className="max-w-md mx-auto text-center lg:text-left lg:max-w-xl lg:mx-0 lg:w-1/2">
             <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl lg:leading-tight xl:text-6xl">
-              Level up ✨ your drinking game
+              Level up ✨your
+              <span className=" animate-pulse"> Drinking game</span>
             </h1>
             <p className="mt-5 text-2xl font-bold text-gray-900 lg:mt-8">
               The juciest and spiciest question ready for you
@@ -60,7 +67,7 @@ const Hero = () => {
               ].map((artwork, index) => (
                 <div
                   key={index}
-                  className="overflow-hidden bg-[#E5C19F] rounded shadow-xl"
+                  className="overflow-hidden transform transition-transform duration-300 hover:scale-105 bg-[#E5C19F] hover:cursor-pointer rounded shadow-xl"
                 >
                   <div className="aspect-w-4  aspect-h-3">
                     <img
@@ -85,22 +92,17 @@ const Hero = () => {
                       </p>
                     </div>
                     <div className="grid grid-cols-2 mt-5 gap-x-4">
-                      <a
-                        href="#"
-                        title=""
-                        className="inline-flex items-center justify-center px-4 py-3 text-sm font-bold text-white transition-all duration-200 bg-gray-900 border border-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-700"
-                        role="button"
+                      <Button
+                        onClick={() => {
+                          if (artwork.title == "Truth") {
+                            router.push("/truth");
+                          } else {
+                            router.push("/");
+                          }
+                        }}
                       >
-                        Place a bid
-                      </a>
-                      <a
-                        href="#"
-                        title=""
-                        className="inline-flex items-center justify-center px-4 py-3 text-sm font-bold text-gray-900 transition-all duration-200 bg-transparent border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-                        role="button"
-                      >
-                        View artwork
-                      </a>
+                        Select
+                      </Button>
                     </div>
                   </div>
                 </div>
