@@ -5,7 +5,7 @@ import { Rubik } from "next/font/google";
 
 const rubik = Rubik({
   subsets: ["latin"],
-  weight: ["400", "500"], // or any specific weight you need
+  weight: ["400", "500"],
 });
 
 export default function Truthlevel() {
@@ -33,7 +33,7 @@ export default function Truthlevel() {
   ];
 
   return (
-    <div className="mt-12  py-14 lg:mt-0 lg:w-full px-4">
+    <div className="mt-12  py-14  bg-[#F5DEB3] lg:mt-0 lg:w-full px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {artworks.map((artwork, index) => (
           <div
@@ -61,10 +61,16 @@ export default function Truthlevel() {
                 <Button
                   className="w-full text-sm py-1"
                   onClick={() => {
-                    if (artwork.title === "Truth") {
-                      router.push("/truth");
-                    } else {
-                      router.push("/");
+                    switch (artwork.title) {
+                      case "Icebreaker":
+                        router.push("/truth/icebreaker");
+                        break;
+                      case "Who questions":
+                        router.push("/truth");
+                        break;
+                      case "Juciest":
+                        router.push("/dad");
+                        break;
                     }
                   }}
                 >
