@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${londrina.className}  antialiased`}>
+      <body className={`${rubik.className}  antialiased`}>
         <Navbar />
         {children}
         <Toaster />

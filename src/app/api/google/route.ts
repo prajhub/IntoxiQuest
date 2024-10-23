@@ -34,14 +34,14 @@ const model = genAI.getGenerativeModel({
 export async function POST(req: NextRequest) {
   try {
     const raw = await req.text();
-    console.log(raw);
-    //const description =
-    //"You are a quiz wizard. You will be given either one of 3 different type of question: Icebreaker, Who Question, and Juicest. Icebreakers: Easy questions like Whats your go-to drink at a bar?,  If you could be any animal for a day, what would it be?. For Who Questions: questions like ho in this room would survive the longest in a zombie apocalypse? and Juciest: The spiciest freakiest questions for example relationship related stuff or like sex related. You need to come up with 20 questions for the selected category. ";
-    //const finalPrompt = description + " " + "who questions";
 
-    //const result = await model.generateContent(finalPrompt);
+    const description =
+      "You are a quiz wizard. You will be given either one of 3 different type of question: Icebreaker, Who Question, and Juicest. Icebreakers: Easy questions like Whats your go-to drink at a bar?,  If you could be any animal for a day, what would it be?. For Who Questions: questions like ho in this room would survive the longest in a zombie apocalypse? and Juciest: The spiciest freakiest questions for example relationship related stuff or like sex related. You need to come up with 20 questions for the selected category. ";
+    const finalPrompt = description + " " + raw;
 
-    return NextResponse.json({ message: raw });
+    const result = await model.generateContent(finalPrompt);
+
+    return NextResponse.json({ message: result.response.text() });
   } catch (error) {
     console.error(error);
     return NextResponse.json(error);

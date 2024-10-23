@@ -17,18 +17,21 @@ export default function Truthlevel() {
       image:
         "https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/hero/2/artwork-1.png",
       description: "Nothing too serious",
+      slug: "icebreaker",
     },
     {
       title: "Who questions",
       image:
         "https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/hero/2/artwork-1.png",
       description: "Who is more likely to do something?",
+      slug: "who-question",
     },
     {
       title: "Juciest",
       image:
         "https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/hero/2/artwork-2.png",
       description: "The juciest and spiciest question ready for you",
+      slug: "juicy",
     },
   ];
 
@@ -60,19 +63,7 @@ export default function Truthlevel() {
               <div className="mt-3">
                 <Button
                   className="w-full text-sm py-1"
-                  onClick={() => {
-                    switch (artwork.title) {
-                      case "Icebreaker":
-                        router.push("/truth/icebreaker");
-                        break;
-                      case "Who questions":
-                        router.push("/truth");
-                        break;
-                      case "Juciest":
-                        router.push("/dad");
-                        break;
-                    }
-                  }}
+                  onClick={() => router.push(`/truth/${artwork.slug}`)}
                 >
                   Select
                 </Button>
