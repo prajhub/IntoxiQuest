@@ -4,45 +4,65 @@ import { ToastAction } from "@/components/ui/toast";
 
 import React, { useState, useEffect } from "react";
 
-const Counter = React.memo(({ timer }: { timer: number }) => {
-  const { toast } = useToast();
+const Counter = React.memo(
+  ({
+    timer,
+    start,
+    changeQuestion,
+  }: {
+    timer: number;
+    start: boolean;
+    changeQuestion: boolean;
+  }) => {
+    const { toast } = useToast();
 
-  const [seconds, setSeconds] = useState(0);
-  const [stopTimer, setStopTimer] = useState(false);
-  let interval: any;
+    const [seconds, setSeconds] = useState(0);
+    const [stopTimer, setStopTimer] = useState(true);
 
-  useEffect(() => {
-    if (!stopTimer) {
-      const start = Date.now();
-      interval = setInterval(() => {
-        const delta = Date.now() - start;
-        setSeconds(Math.floor(delta / 1000));
-      }, 1000);
+    let interval: any;
+    useEffect(() => {
+      setStopTimer(!start);
+    }, [start, changeQuestion]);
 
-      return () => clearInterval(interval);
-    }
-  }, [stopTimer]);
+    useEffect(() => {
+      if (!stopTimer) {
+        // same as stoptimer === false
+        const start = Date.now();
+        interval = setInterval(() => {
+          const delta = Date.now() - start;
+          setSeconds(Math.floor(delta / 1000));
+        }, 1000);
 
-  useEffect(() => {
-    if (seconds === timer) {
-      toast({
-        title: "Time's up!",
-        description: "You've completed the game!",
-        action: (
-          <ToastAction
-            altText="Restart"
-            onClick={() => window.location.reload()}
-          >
-            Restart
-          </ToastAction>
-        ),
-      });
+        return () => clearInterval(interval);
+      }
+    }, [stopTimer]);
 
-      setStopTimer(!stopTimer);
-    }
-  }, [seconds, timer, toast]);
+    useEffect(() => {
+      if (seconds === timer) {
+        toast({
+          title: "Time's up!",
+          description: "You've completed the game!",
+          action: (
+            <ToastAction
+              altText="Restart"
+              onClick={() => window.location.reload()}
+            >
+              Restart
+            </ToastAction>
+          ),
+        });
 
-  return <div className="text-black">{seconds}</div>;
-});
+        setStopTimer(!stopTimer);
+      }
+    }, [seconds, timer, toast]);
+
+    return (
+      <section>
+        {" "}
+        <div className="text-black">{seconds}</div>
+      </section>
+    );
+  }
+);
 
 export default React.memo(Counter);
